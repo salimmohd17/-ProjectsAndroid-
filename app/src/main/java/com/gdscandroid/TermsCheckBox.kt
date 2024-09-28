@@ -18,6 +18,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.gdscandroid.ui.theme.GdscGreen
 
 @Composable
 fun TermsCheckbox(
@@ -44,7 +45,7 @@ fun TermsCheckbox(
                 addStyle(
                     style =
                     SpanStyle(
-                        color = Color.Black,
+                        color = GdscGreen,
                         textDecoration = TextDecoration.Underline,
                     ),
                     start = 9,

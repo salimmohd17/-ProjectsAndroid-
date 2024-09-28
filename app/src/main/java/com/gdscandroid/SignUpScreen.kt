@@ -1,6 +1,7 @@
 package com.gdscandroid
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -23,12 +27,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.gdscandroid.ui.theme.GDSCOnboardingText
 import com.gdscandroid.ui.theme.GdscBackground
 import com.gdscandroid.ui.theme.GdscGreen
 
@@ -81,7 +89,7 @@ fun SignUpScreen() {
                     Brush.linearGradient(
                         colors =
                         listOf(
-                            GdscGreen,
+                            GdscBackground,
                             GdscBackground,
                         ),
                         start = androidx.compose.ui.geometry.Offset(1000f, 1000f),
@@ -161,7 +169,62 @@ fun SignUpScreen() {
 
                     TermsCheckbox(isTermsChecked)
 
-                    Spacer(modifier = Modifier.weight(3f))
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Button(
+                        onClick = {},
+                        modifier =
+                        Modifier
+                            .fillMaxWidth(),
+                        colors =
+                        ButtonDefaults.buttonColors(
+                            containerColor = Color.White,
+                        ),
+                    ) {
+                        Text(text = "Sign Up", color = Color.Black)
+                    }
+
+                    Spacer(modifier = Modifier.weight(0.4f))
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "Skip",
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                    )
+
+                    Spacer(modifier = Modifier.weight(0.4f))
+                    GoogleFaceBookComponent()
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    val termsText = "Have account? Let's Sign In"
+                    val annotatedString =
+                        AnnotatedString.Builder(termsText).apply {
+                            addStyle(
+                                style =
+                                SpanStyle(
+                                    color = GdscGreen,
+                                    textDecoration = TextDecoration.Underline,
+                                ),
+                                start = 20,
+                                end = termsText.length,
+                            )
+                        }
+                            .toAnnotatedString()
+
+                    ClickableText(
+                        text = annotatedString,
+                        onClick = { offset ->
+                            if (offset >= 9 && offset <= termsText.length) {
+                                // Handle the click event on "terms and conditions"
+                                //navController.navigate(Screens.SignInScreen.route)
+                            }
+                        },
+                        style = MaterialTheme.typography.bodyMedium.copy(color = GDSCOnboardingText),
+                    )
+
+                    Spacer(modifier = Modifier.weight(8f))
+
 
 
                 }
