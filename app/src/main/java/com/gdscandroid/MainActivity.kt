@@ -20,10 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GdscAndroidTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    SignUpScreen()
                 }
             }
         }
@@ -41,7 +38,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
-    GdscAndroidTheme {
-        Greeting("Android")
-    }
+    SignUpScreen()
 }
