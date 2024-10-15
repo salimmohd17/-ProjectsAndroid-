@@ -1,7 +1,6 @@
 package com.gdscandroid
 
 import android.app.Activity
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,12 +35,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.gdscandroid.ui.theme.GDSCOnboardingText
 import com.gdscandroid.ui.theme.GdscBackground
 import com.gdscandroid.ui.theme.GdscGreen
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(
+    navController: NavController
+) {
 
     val context = LocalContext.current
 
@@ -123,6 +126,7 @@ fun SignUpScreen() {
                     )
 
                     Spacer(modifier = Modifier.weight(0.1f))
+                    //weight- fractions   || width || height          16.dp
 
                     Text(
                         modifier =
@@ -217,7 +221,9 @@ fun SignUpScreen() {
                         onClick = { offset ->
                             if (offset >= 9 && offset <= termsText.length) {
                                 // Handle the click event on "terms and conditions"
-                                //navController.navigate(Screens.SignInScreen.route)
+                                navController.navigate(Screens.SignInScreen.route){
+                                    popUpTo(Screens.SignInScreen.route) {inclusive = true}
+                                }
                             }
                         },
                         style = MaterialTheme.typography.bodyMedium.copy(color = GDSCOnboardingText),
@@ -277,5 +283,6 @@ fun AliasField(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SignUpPreview() {
-    SignUpScreen()
+    val navcontroller = rememberNavController()
+    SignUpScreen(navcontroller)
 }
